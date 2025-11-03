@@ -1,6 +1,8 @@
 import axios from 'axios';
 
-const API_URL = `${process.env.REACT_APP_API_URL}/api`;
+// Use REACT_APP_API_URL from .env files, or fallback to /api for proxy
+const baseURL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+const API_URL = `${baseURL}/api`;
 
 // Set up axios defaults
 axios.defaults.baseURL = API_URL;

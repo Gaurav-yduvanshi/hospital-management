@@ -133,6 +133,30 @@ Admin
 - 404 when saving comments: ensure backend is running and restarted after code changes. The endpoint is `PATCH /api/hospitals/patients/:id/comments`.
 - React Router future flag warnings are informational and safe to ignore.
 - If you see Google Maps API warnings, remove any leftover `<script>` tag from `frontend/public/index.html`.
+- CORS errors: ensure backend CORS is configured to allow your frontend URL.
+
+## Deployment
+### Frontend (Netlify)
+1. Connect your GitHub repo to Netlify
+2. Set build command: `npm run build`
+3. Set publish directory: `build`
+4. Add environment variable in Netlify dashboard:
+   - `REACT_APP_API_URL` = your backend URL (e.g., `https://your-backend.herokuapp.com`)
+5. Deploy
+
+### Backend (Heroku or similar)
+1. Ensure backend CORS includes your Netlify URL (already configured in server.js)
+2. Deploy to Heroku / Railway / similar platform
+3. Set environment variables:
+   - `MONGODB_URI` = your MongoDB connection string
+   - `JWT_SECRET` = your JWT secret key
+   - `PORT` = 5000 (or your chosen port)
+4. Update frontend's `.env.production` with your backend URL
+
+## Environment Files
+- `frontend/.env.development` - Used in local development (points to `http://localhost:5000`)
+- `frontend/.env.production` - Used in production builds (update with your backend URL)
+- `backend/.env` - Backend environment variables (MongoDB, JWT, Port)
 
 ## Next steps / optional enhancements
 - Email/SMS notifications when appointments are booked or updated
